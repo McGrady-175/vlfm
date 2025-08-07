@@ -14,6 +14,7 @@ export GROUNDING_DINO_PORT=${GROUNDING_DINO_PORT:-12181}
 export BLIP2ITM_PORT=${BLIP2ITM_PORT:-12182}
 export SAM_PORT=${SAM_PORT:-12183}
 export YOLOV7_PORT=${YOLOV7_PORT:-12184}
+export RADIO_PORT=${RADIO_PORT:-12185}
 
 session_name=vlm_servers_${RANDOM}
 
@@ -23,15 +24,19 @@ tmux new-session -d -s ${session_name}
 # Split the window vertically
 tmux split-window -v -t ${session_name}:0
 
-# Split both panes horizontally
+# Split both panes horizontally  
 tmux split-window -h -t ${session_name}:0.0
 tmux split-window -h -t ${session_name}:0.2
+
+# Add one more pane for RADIO
+tmux split-window -h -t ${session_name}:0.3
 
 # Run commands in each pane
 tmux send-keys -t ${session_name}:0.0 "${VLFM_PYTHON} -m vlfm.vlm.grounding_dino --port ${GROUNDING_DINO_PORT}" C-m
 tmux send-keys -t ${session_name}:0.1 "${VLFM_PYTHON} -m vlfm.vlm.blip2itm --port ${BLIP2ITM_PORT}" C-m
 tmux send-keys -t ${session_name}:0.2 "${VLFM_PYTHON} -m vlfm.vlm.sam --port ${SAM_PORT}" C-m
 tmux send-keys -t ${session_name}:0.3 "${VLFM_PYTHON} -m vlfm.vlm.yolov7 --port ${YOLOV7_PORT}" C-m
+tmux send-keys -t ${session_name}:0.4 "${VLFM_PYTHON} -m vlfm.vlm.radio --port ${RADIO_PORT}" C-m
 
 # Attach to the tmux session to view the windows
 echo "Created tmux session '${session_name}'. You must wait up to 90 seconds for the model weights to finish being loaded."
