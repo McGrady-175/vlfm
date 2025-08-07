@@ -22,6 +22,10 @@ dependencies = [
     "open3d >= 0.17.0",
     "transformers == 4.26.0",  # higher versions than 4.26.0 "break" BLIP-2 in LAVIS
     "timm == 0.4.12",
+    "ftfy",  # required by CLIP
+    "regex",  # required by CLIP
+    "pyopenvdb",  # OpenVDB for 3D voxel mapping
+    "numba",  # JIT compilation for performance
     "frontier_exploration @ git+https://github.com/naokiyokoyama/frontier_exploration.git",
     "mobile_sam @ git+https://github.com/ChaoningZhang/MobileSAM.git",
     "depth_camera_filtering @ git+https://github.com/naokiyokoyama/depth_camera_filtering",

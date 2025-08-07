@@ -16,6 +16,7 @@ from vlfm.obs_transformers.utils import image_resize
 from vlfm.policy.utils.pointnav_policy import WrappedPointNavResNetPolicy
 from vlfm.utils.geometry_utils import get_fov, rho_theta
 from vlfm.vlm.blip2 import BLIP2Client
+from vlfm.vlm.radio import RADIOClient
 from vlfm.vlm.coco_classes import COCO_CLASSES
 from vlfm.vlm.grounding_dino import GroundingDINOClient, ObjectDetections
 from vlfm.vlm.sam import MobileSAMClient
